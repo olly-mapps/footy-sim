@@ -1,51 +1,33 @@
 #include <iostream>
-#include <cstdlib>
-#include <ctime>
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
 
-#include "team.h"
+int main()
+{
 
-int Sim(const int s1, const int s2){
+    glfwInit();
 
-    // Skill Difference
-    double chance = static_cast<double>(50 + (s1-s2)) / 100.0;
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-    // Generate random variable between 0 and 1
-    double r = static_cast<double>(rand()) / RAND_MAX;
-
-    // If r less then 0.5, player 1 wins
-    return r < chance ? 0 : 1;
-}
-
-int main(int, char**){
-
-    // Set seed
-    srand(static_cast<unsigned int>(time(nullptr)));
-
-    // Define Teams
-    Team t1(10);
-    Team t2(50); //Better skilled
-
-    // Define counts
-    int t1_wins = 0;
-    int t2_wins = 0;
-    int n_games = 100;
-
-    //Simulation loop
-    for (int i = 0; i < n_games; ++i){
-        int winner = Sim(t1.getSkillStat(), t2.getSkillStat());
-        if (winner == 0)
-            t1_wins++;
-
-        else 
-            t2_wins++;
+    GLFWwindow* window = glfwCreateWindow(800, 800, "Football Sim", NULL , NULL);
+    if (window == NULL)
+    {
+        std::cout << "Failed to create window" << std::endl;
+        glfwTerminate();
+        return -1;
     }
 
-    std::cout << "Results after " << n_games << " games:\n";
-    std::cout << "Agent 1 wins: " << t1_wins << "\n";
-    std::cout << "Agent 2 wins: " << t2_wins << "\n";
+    glfwMakeContextCurrent(window);
 
-    // std::cout << t1.getSkillStat() << std::endl;
-    // std::cout << t2.getSkillStat() << std::endl;
+    while (!glfwWindowShouldClose(window))
+    {
+        glfwPollEvents();
+    }
+    glfwDestroyWindow(window);
+
+    glfwTerminate();
 
     return 0;
 }
