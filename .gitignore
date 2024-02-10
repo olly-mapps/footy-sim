@@ -48,6 +48,7 @@ include/divisible/*
 .idea/*.xml
 
 build/**/*
+build/
 thirdparty/
 bin/*
 test/test_runner
