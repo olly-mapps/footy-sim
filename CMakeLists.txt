@@ -22,3 +22,6 @@ target_include_directories(${PROJECT_NAME}
     PUBLIC
         ${PROJECT_SOURCE_DIR}/include/
 )
+
+# Copy contents to root, works for some reason
+file(COPY resources DESTINATION /)

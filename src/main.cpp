@@ -55,7 +55,7 @@ int main()
     gladLoadGL();
     glViewport(0, 0, 800, 800);
 
-    Shader shaderProgram("default.vert", "default.frag");
+    Shader shaderProgram("resources/shaders/default.vert", "resources/shaders/default.frag");
 
     VAO VAO1;
     VAO1.Bind();
